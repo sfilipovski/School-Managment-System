@@ -1,0 +1,15 @@
+﻿@model SchoolManagmentSystem.Models.InstructorCourses
+@{
+    ViewBag.Title = "AddCourseToInstructor";
+}
+
+<h2>Add Course To Instructor</h2>
+
+@using (Html.BeginForm("AddCourseToInstructor", "Instructors"))
+{
+    <div class="form-group col-md-8">
+        @Html.DropDownListFor(m => m.courseId, new SelectList(Model.courses, "courseId", "Title"), new { @class = "form-control" })
+    </div>
+    @Html.HiddenFor(m => m.instructorId)
+    <button type="submit" class="btn btn-primary">Add</button>
+}

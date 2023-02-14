@@ -1,0 +1,56 @@
+﻿@model IEnumerable<SchoolManagmentSystem.Models.Course>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h1>Courses</h1>
+
+<p>
+    @if (User.IsInRole("Admin"))
+    {
+        @Html.ActionLink("Add Course", "Create", null, new { @class = "btn btn-primary" })
+    }
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Code)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Credits)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Code)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Credits)
+        </td>
+        <td>
+            @if (User.IsInRole("Admin"))
+            {
+                @Html.ActionLink("Edit | ", "Edit", new { id = item.courseId })
+                @Html.ActionLink("Delete |", "Delete", new { id = item.courseId })
+            }
+            @if (User.IsInRole("Admin") || User.IsInRole("Instructor"))
+            {
+                @Html.ActionLink("Details", "Details", new { id = item.courseId }) 
+}
+
+
+        </td>
+    </tr>
+}
+
+</table>
